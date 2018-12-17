@@ -1,0 +1,22 @@
+{
+	"Pacientes": [
+		{"Datos_Personales":
+			{"Nombre": "Juan Caro","Rut": "12456456-8","Edad":33,"Alergias":["Insectos","Polvo","Polen"],"Enfermedades":["Estres","Soriasis"]},
+			"Procedimientos": {"Asignados": [], "Completados": []},
+			"Examenes": {"Realizados": [],"No_Realizados": []},
+			"Medicamentos": {"Recetados": [],"Suministrados": []}
+		},
+		{"Datos_Personales":
+			{"Nombre": "Maria Ortiz","Rut": "43432123-6","Edad":22,"Alergias":["Polvo","Medicamentos"],"Enfermedades":["Estres","Soriasis"]},
+			"Procedimientos": {"Asignados": [], "Completados": []},
+			"Examenes": {"Realizados": [],"No_Realizados": []},
+			"Medicamentos": {"Recetados": [],"Suministrados": []}
+		},
+		{"Datos_Personales":
+			{"Nombre": "Diego Cantillana","Rut": "2345578-4","Edad":50,"Alergias":["Polen"],"Enfermedades":["Hepatitis","Asma"]},
+			"Procedimientos": {"Asignados": [], "Completados": []},
+			"Examenes": {"Realizados": [],"No_Realizados": []},
+			"Medicamentos": {"Recetados": [],"Suministrados": []}
+		}
+	]
+}

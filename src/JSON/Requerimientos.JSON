@@ -1,0 +1,22 @@
+{
+    "Requerimientos": [
+        {"Cargo": "Doctor","ID": 1,"ListaPacientes": [
+            {"Nombre": "Maria Ortiz","Ficha": "Procedimientos","Texto": "Operacion Ambulatoria nasal"},
+            {"Nombre": "Juan Caro","Ficha": "Medicamentos","Texto": "Omeprazol 500mg"},
+            {"Nombre": "Diego Cantillana","Ficha": "Examenes","Texto": "Endoscopia digestiva alta"}
+            ]
+        },
+        {"Cargo": "Enfermero","ID": 1,"ListaPacientes": [
+            {"Nombre": "Maria Ortiz","Ficha": "Procedimientos","Texto": "Sutura"},
+            {"Nombre": "Juan Caro","Ficha": "Procedimientos","Texto": "Intravenosa"},
+            {"Nombre": "Diego Cantillana","Ficha": "Procedimientos","Texto": "Suero"}
+            ]
+        },
+        {"Cargo": "Paramedico","ID": 1,"ListaPacientes": [
+            {"Nombre": "Maria Ortiz","Ficha": "Examenes","Texto": "Colonoscopia"},
+            {"Nombre": "Juan Caro","Ficha": "Examenes","Texto": "Ecografia"},
+            {"Nombre": "Diego Cantillana","Ficha": "Examenes","Texto": "Endoscopia"}
+            ]
+        }
+    ]
+}

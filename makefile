@@ -12,7 +12,9 @@ classes:
 	javac $(GSON) -sourcepath src src/IP.java
 	javac $(GSON) -sourcepath src src/Servidor.java
 	javac $(GSON) -sourcepath src src/Cliente.java
+	javac $(GSON) -sourcepath src src/WaitingRequest.java
 	javac $(GSON) -sourcepath src src/Main.java
+	
 
 run:
 	java $(GSON):src Main
