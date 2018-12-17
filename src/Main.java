@@ -26,6 +26,7 @@ public class Main implements Runnable {
     Pacientes pacientes;
     IP listaip;
     String ipMaquina;
+    String ipCoordinador;
     Servidor servidor;
     Cliente cliente;
     List<String> candidatos = new ArrayList<>();
@@ -97,9 +98,28 @@ public class Main implements Runnable {
             String mensaje = EscogerCoordinador(main);
             System.out.println("[Algoritmo Bully] Nuevo Coordinador con IP: "+mensaje.split(";")[0]);
             System.out.println("[Algoritmo Bully] Avisando resultado..");
-                cliente.EnviarBroadcast(mensaje, listasockets);
+            cliente.EnviarBroadcast(mensaje, listasockets);
+            if(mensaje.split(";")[0].equals(main.ipMaquina)){
+                main.Is_Coordinador = true;
+                main.ipCoordinador = mensaje.split(";")[0];
+                System.out.println("[Algoritmo Bully] Esta maquina es el nuevo Coordinador");
+            }
+            else{
+                main.Is_Coordinador = false;
+                main.ipCoordinador = mensaje.split(";")[0];
+            }
         }
-        
+        else{
+            Thread.sleep(5000);
+        }
+        try{
+            FileWriter archivolog = new FileWriter("Operaciones.log",true);
+            archivolog.write("Operaciones Relativas a Maquina IP: "+main.ipMaquina+"\n\n");
+            archivolog.close();
+        }
+        catch (IOException e){}
+
+        SolicitarArchivo(main, "Medico","PerezJuanito",1,1,"Recetar paracetamol",cliente);
     }
     
     /**
@@ -235,10 +255,10 @@ public class Main implements Runnable {
         return null;
     }
 
-    public void SolicitarArchivo(String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
+    public static void SolicitarArchivo(Main main,String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
         //REQUEST : IP_SOLICITANTE; LOG_REQUEST; DATA
         //  DATA: CARGO + NOMBRE_SOLICITANTE + ID_SOLICITANTE + ID_PACIENTE + ACCION;
-        String request = ipMaquina+"[LOG_REQUEST];"+cargo+"+"+nombreApellido+"+"+id_trabajador+"+"+id_paciente+"+"+accion;
+        String request = main.ipMaquina+"[LOG_REQUEST];"+cargo+"+"+nombreApellido+"+"+id_trabajador+"+"+id_paciente+"+"+accion;
         try {
             cliente.EnviarIndividual(request, cliente.coordinatorSocket);
             String answer = cliente.RecibirIndividual(cliente.coordinatorSocket);
@@ -271,16 +291,11 @@ public class Main implements Runnable {
                         }
                     }
                 }.start();
-                while(cliente.waitingLog || !cliente.newCoordinator){
-                    try {
-                        wait(100);
-                    }
-                    catch (InterruptedException e){}
-                }
+                while(cliente.waitingLog || !cliente.newCoordinator){  }
                 if (cliente.newCoordinator)
                 {
                     cliente.newCoordinator = false;
-                    SolicitarArchivo(cargo, nombreApellido, id_trabajador, id_paciente, accion, cliente); // Cambiar a socket del nuevo coordinador
+                    SolicitarArchivo(main, cargo, nombreApellido, id_trabajador, id_paciente, accion, cliente); // Cambiar a socket del nuevo coordinador
                     return;
                 }
                 else{
