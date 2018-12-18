@@ -171,8 +171,98 @@ public class Main implements Runnable {
     }
 
 
+
+
+
+
+    public static void SolicitarArchivo(Main main,String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
+        //REQUEST : IP_SOLICITANTE; LOG_REQUEST; DATA
+        //  DATA: CARGO + NOMBRE_SOLICITANTE + ID_SOLICITANTE + ID_PACIENTE + ACCION;
+        String request = main.ipMaquina+"[LOG_REQUEST];"+cargo+"+"+nombreApellido+"+"+id_trabajador+"+"+id_paciente+"+"+accion;
+        try {
+            cliente.EnviarIndividual(request, cliente.coordinatorSocket);
+            String answer = cliente.RecibirIndividual(cliente.coordinatorSocket);
+            String mensaje = answer.substring(answer.indexOf(";")+1);
+
+            if(answer.substring(request.indexOf("[")+1,request.indexOf("]")).equals("ACCEPTED")){
+                String hora = mensaje.split("\\+")[0];
+                String IP_destino = mensaje.split("\\+")[1];
+                int puerto_destino = Integer.parseInt(mensaje.split("\\+")[2]);
+                FileWriter writer = new FileWriter("Log.txt",true);
+
+                // Log Format : HORA_ESCRITURA CARGO_SOLICITANTE NOMBRE_SOLICITANTE SOLICITUD
+                String log_write = hora+" "+cargo+" "+nombreApellido+" "+ request;
+                writer.write(log_write);
+                writer.close();
+                Socket aux_socket = new Socket(IP_destino, puerto_destino);
+                cliente.EnviarIndividual("[WRITED];"+log_write, aux_socket);
+                aux_socket.close();
+            }
+            else{
+                cliente.waitingLog = true;
+                new Thread(){
+                    public void run(){
+                        try{
+                            cliente.RecibirIndividual(cliente.coordinatorSocket);  // Es este el socket correcto?
+                            cliente.waitingLog = false;
+                        }
+                        catch (IOException e) {
+
+                        }
+                    }
+                }.start();
+                while(cliente.waitingLog || !cliente.newCoordinator){  }
+                if (cliente.newCoordinator)
+                {
+                    cliente.newCoordinator = false;
+                    SolicitarArchivo(main, cargo, nombreApellido, id_trabajador, id_paciente, accion, cliente); // Cambiar a socket del nuevo coordinador
+                    return;
+                }
+                else{
+                    String hora = mensaje.split("\\+")[0];
+                    String IP_destino = mensaje.split("\\+")[1];
+                    int puerto_destino = Integer.parseInt(mensaje.split("\\+")[2]);
+                    FileWriter writer = new FileWriter("Log.txt",true);
+
+                    // Log Format : HORA_ESCRITURA CARGO_SOLICITANTE NOMBRE_SOLICITANTE SOLICITUD
+                    String log_write = hora+" "+cargo+" "+nombreApellido+" "+ request;
+                    writer.write(log_write);
+                    writer.close();
+                    cliente.EnviarIndividual("[OK]", cliente.coordinatorSocket);
+
+
+                }
+
+            }
+
+        }
+        catch (IOException e){
+
+        }
+
+    }
+    
+    @Override
+    public void run(){
+        try {
+            ServerSocket servidor = new ServerSocket(this.servidor.puerto);
+            while(true){
+                Socket socket = servidor.accept();
+                System.out.println("Conexion aceptada");
+                DataInputStream mensaje = new DataInputStream(socket.getInputStream());
+                String data = mensaje.readUTF();
+                ProcesarMensaje(this,data,this.candidatos, socket);
+                socket.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void ProcesarMensaje(Main main,String mensaje,List<String> candidatos, Socket socket){
         // mensaje: IP_EMISOR;CODIGO_MENSAJE;DATA_MENSAJE
+
+
         String IP_emisor = mensaje.split(";")[0];
         String Codigo = mensaje.split(";")[1];
         String Data = mensaje.split(";")[2];
@@ -181,7 +271,8 @@ public class Main implements Runnable {
 
         if (Codigo.equals("Bully")) {
             candidatos.add(mensaje);
-         //   String escogido = EscogerCoordinador(main);
+            System.out.println("Candidato recibido");
+            //   String escogido = EscogerCoordinador(main);
         } else if (Codigo.equals("R_Bully")) {
             System.out.println("[Algoritmo Bully] Resultado: Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
             if (mensaje.split(";")[0].equals(main.ipMaquina)) {
@@ -268,90 +359,5 @@ public class Main implements Runnable {
 
 
     }
-
-
-
-    public static void SolicitarArchivo(Main main,String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
-        //REQUEST : IP_SOLICITANTE; LOG_REQUEST; DATA
-        //  DATA: CARGO + NOMBRE_SOLICITANTE + ID_SOLICITANTE + ID_PACIENTE + ACCION;
-        String request = main.ipMaquina+"[LOG_REQUEST];"+cargo+"+"+nombreApellido+"+"+id_trabajador+"+"+id_paciente+"+"+accion;
-        try {
-            cliente.EnviarIndividual(request, cliente.coordinatorSocket);
-            String answer = cliente.RecibirIndividual(cliente.coordinatorSocket);
-            String mensaje = answer.substring(answer.indexOf(";")+1);
-
-            if(answer.substring(request.indexOf("[")+1,request.indexOf("]")).equals("ACCEPTED")){
-                String hora = mensaje.split("\\+")[0];
-                String IP_destino = mensaje.split("\\+")[1];
-                int puerto_destino = Integer.parseInt(mensaje.split("\\+")[2]);
-                FileWriter writer = new FileWriter("Log.txt",true);
-
-                // Log Format : HORA_ESCRITURA CARGO_SOLICITANTE NOMBRE_SOLICITANTE SOLICITUD
-                String log_write = hora+" "+cargo+" "+nombreApellido+" "+ request;
-                writer.write(log_write);
-                writer.close();
-                Socket aux_socket = new Socket(IP_destino, puerto_destino);
-                cliente.EnviarIndividual("[WRITED];"+log_write, aux_socket);
-                aux_socket.close();
-            }
-            else{
-                cliente.waitingLog = true;
-                new Thread(){
-                    public void run(){
-                        try{
-                            cliente.RecibirIndividual(cliente.coordinatorSocket);  // Es este el socket correcto?
-                            cliente.waitingLog = false;
-                        }
-                        catch (IOException e) {
-
-                        }
-                    }
-                }.start();
-                while(cliente.waitingLog || !cliente.newCoordinator){  }
-                if (cliente.newCoordinator)
-                {
-                    cliente.newCoordinator = false;
-                    SolicitarArchivo(main, cargo, nombreApellido, id_trabajador, id_paciente, accion, cliente); // Cambiar a socket del nuevo coordinador
-                    return;
-                }
-                else{
-                    String hora = mensaje.split("\\+")[0];
-                    String IP_destino = mensaje.split("\\+")[1];
-                    int puerto_destino = Integer.parseInt(mensaje.split("\\+")[2]);
-                    FileWriter writer = new FileWriter("Log.txt",true);
-
-                    // Log Format : HORA_ESCRITURA CARGO_SOLICITANTE NOMBRE_SOLICITANTE SOLICITUD
-                    String log_write = hora+" "+cargo+" "+nombreApellido+" "+ request;
-                    writer.write(log_write);
-                    writer.close();
-                    cliente.EnviarIndividual("[OK]", cliente.coordinatorSocket);
-
-
-                }
-
-            }
-
-        }
-        catch (IOException e){
-
-        }
-
-    }
-    
-    @Override
-    public void run(){
-        try {
-            ServerSocket servidor = new ServerSocket(this.servidor.puerto);
-            while(true){
-                Socket socket = servidor.accept();
-                DataInputStream mensaje = new DataInputStream(socket.getInputStream());
-                String data = mensaje.readUTF();
-                ProcesarMensaje(this,data,this.candidatos, socket);
-                //System.out.println("\n"+data+"\n");
-                socket.close();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
+
