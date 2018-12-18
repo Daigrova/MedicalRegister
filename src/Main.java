@@ -60,7 +60,7 @@ public class Main implements Runnable {
         listaip = listaip.ProcesarJSON("JSON/IP.JSON");
 
         //Consulta por IP de maquina
-        String ipMaquina= ConsultarIPMaquina();
+        String ipMaquina= null;
 
         Enumeration NIs = NetworkInterface.getNetworkInterfaces();
         int i = 0;
