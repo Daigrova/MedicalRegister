@@ -1,0 +1,46 @@
+[33mcommit f2aeabe64e7e8462691b8498cc6b38e7a0cc49f3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: David Rojas Vargas <david.rojasv@hotmail.com>
+Date:   Mon Dec 17 20:53:11 2018 -0300
+
+            modified:   src/Main.java
+
+[33mcommit 933a3f7b5be6cd32c89bd406f28f1f28b823e15d[m
+Author: David Rojas Vargas <david.rojasv@hotmail.com>
+Date:   Mon Dec 17 20:27:01 2018 -0300
+
+            modified:   makefile
+            new file:   src/.DS_Store
+            new file:   src/Cliente.java
+            new file:   src/Doctor.java
+            new file:   src/Enfermero.java
+            new file:   src/IP.java
+            new file:   src/JSON/.DS_Store
+            new file:   src/JSON/IP.JSON
+            new file:   src/JSON/Icon_
+            new file:   src/JSON/Pacientes.JSON
+            new file:   src/JSON/Requerimientos.JSON
+            new file:   src/JSON/Trabajadores.JSON
+            new file:   src/Librerias/Icon_
+            new file:   src/Librerias/Librerias.iml
+            new file:   src/Librerias/gson-2.8.5.jar
+            new file:   src/Main.java
+            new file:   src/Paciente.java
+            new file:   src/Pacientes.java
+            new file:   src/Paramedico.java
+            new file:   src/Requerimiento.java
+            new file:   src/Requerimientos.java
+            new file:   src/Servidor.java
+            new file:   src/Trabajadores.java
+            new file:   src/WaitingRequest.java
+
+[33mcommit d60cf1cce849d17cfbc29d2367eff41f9ab245f6[m
+Author: Daigrova <37351315+Daigrova@users.noreply.github.com>
+Date:   Mon Dec 17 20:07:12 2018 -0300
+
+    Add files via upload
+
+[33mcommit 493e936b81a48780bd8027def630dbf68de4d3b8[m
+Author: Daigrova <37351315+Daigrova@users.noreply.github.com>
+Date:   Mon Dec 17 12:55:01 2018 -0300
+
+    Add files via upload

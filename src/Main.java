@@ -165,6 +165,7 @@ public class Main implements Runnable {
                 System.out.println("[Algoritmo Bully] Esta maquina es el nuevo Coordinador");
             } else {
                 main.Is_Coordinador = false;
+                main.cliente.coordinatorSocket= main.cliente.SocketAsociado(mensaje.split(";")[0]);
             }
         }
         else if (Codigo.equals("LOG_REQUEST")){
