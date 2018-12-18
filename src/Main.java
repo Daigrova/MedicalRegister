@@ -110,7 +110,7 @@ public class Main implements Runnable {
             }
         }
         else{
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         }
         try{
             FileWriter archivolog = new FileWriter("Operaciones.log",true);
@@ -138,7 +138,7 @@ public class Main implements Runnable {
             String experiencia = String.valueOf(candidato.getEstudios()+candidato.getExperiencia());
             System.out.println("[Algortimo Bully] Enviando Candidato a Coordinador...");
             Socket s = cliente.SocketAsociado("10.6.40.169");
-            cliente.EnviarIndividual(ipmaquina+";"+"Bully;"+experiencia,s);            
+            cliente.EnviarIndividual(ipmaquina+";"+"Bully;"+experiencia,s);
         }
     }
 
