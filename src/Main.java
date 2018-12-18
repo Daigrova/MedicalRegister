@@ -273,7 +273,9 @@ public class Main implements Runnable {
                     main.cliente.EnviarBroadcast(candidato);
                 }
             }
-            catch (IOException e){}
+            catch (IOException e){
+                System.out.println("Something wrong happened");
+            }
 
         } else if (Codigo.equals("R_Bully")) {
             System.out.println("[Algoritmo Bully] Resultado: Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
