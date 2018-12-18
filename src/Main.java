@@ -2,6 +2,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.ZonedDateTime;
@@ -59,6 +60,10 @@ public class Main implements Runnable {
         
         //Consulta por IP de maquina
         String ipMaquina = ConsultarIPMaquina();
+        if (ipMaquina.equals(InetAddress.getLocalHost()))
+            System.out.println("Si funcionaria");
+        else
+            System.out.println("No funcionaria");
         
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);
@@ -147,6 +152,23 @@ public class Main implements Runnable {
         }
     }
 
+
+    public static String EscogerCoordinador(Main main){
+
+        System.out.println("Fueron encontrados "+main.candidatos.size()+" candidatos\nSeleccionando el mejor");
+
+        String ipCoordinador = main.candidatos.get(0).split(";")[0];
+        int expCoordinador = Integer.parseInt(main.candidatos.get(0).split(";")[2]);
+
+        for(int i=0;i<main.candidatos.size();i++){
+            if(Integer.parseInt(main.candidatos.get(i).split(";")[2]) > expCoordinador){
+                ipCoordinador = main.candidatos.get(i).split(";")[0];
+                expCoordinador = Integer.parseInt(main.candidatos.get(i).split(";")[2]);
+            }
+        }
+
+        return ipCoordinador+";R_Bully;"+String.valueOf(expCoordinador);
+    }
 
 
     public static void ProcesarMensaje(Main main,String mensaje,List<String> candidatos, Socket socket){
@@ -247,21 +269,7 @@ public class Main implements Runnable {
 
     }
 
-    
-    public static String EscogerCoordinador(Main main){
-        if(main.candidatos.size() == 4){
-            String ipCoordinador = main.candidatos.get(0).split(";")[0];
-            int expCoordinador = Integer.parseInt(main.candidatos.get(0).split(";")[2]);
-            for(int i=1;i<main.candidatos.size();i++){
-                if(Integer.parseInt(main.candidatos.get(i).split(";")[2]) > expCoordinador){
-                    ipCoordinador = main.candidatos.get(i).split(";")[0];
-                    expCoordinador = Integer.parseInt(main.candidatos.get(i).split(";")[2]);
-                }
-            }
-        return ipCoordinador+";R_Bully;"+String.valueOf(expCoordinador);
-        }
-        return null;
-    }
+
 
     public static void SolicitarArchivo(Main main,String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
         //REQUEST : IP_SOLICITANTE; LOG_REQUEST; DATA
