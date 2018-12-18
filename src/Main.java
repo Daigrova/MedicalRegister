@@ -103,7 +103,7 @@ public class Main implements Runnable {
         
 
         List<Socket> listasockets = cliente.CrearSocket(ipMaquina, listaip);
-/*
+
         //El primer coordinador es la maquina con ip 10.4.60.169
         //las demas maquinas envian su mejor candidato para algortimo de bully
         System.out.println("\nAplicando Algortimo Bully...");
@@ -119,8 +119,8 @@ public class Main implements Runnable {
             archivolog.close();
         }
         catch (IOException e){}
-*/
-    //    SolicitarArchivo(main, "Medico","PerezJuanito",1,1,"Recetar paracetamol",cliente);
+
+        SolicitarArchivo(main, "Medico","PerezJuanito",1,1,"Recetar paracetamol",cliente);
     }
     
     /**
