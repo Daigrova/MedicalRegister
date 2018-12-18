@@ -134,11 +134,16 @@ public class Main implements Runnable {
     }
     
     public static void EnviarCandidato(Doctor candidato,List<Socket> listasockets,String ipmaquina,Cliente cliente) throws IOException{
-        if(!ipmaquina.equals("10.6.40.169")){
-            String experiencia = String.valueOf(candidato.getEstudios()+candidato.getExperiencia());
-            System.out.println("[Algortimo Bully] Enviando Candidato a Coordinador...");
-            Socket s = cliente.SocketAsociado("10.6.40.169");
-            cliente.EnviarIndividual(ipmaquina+";"+"Bully;"+experiencia,s);
+        try {
+            if (!ipmaquina.equals("10.6.40.169")) {
+                String experiencia = String.valueOf(candidato.getEstudios() + candidato.getExperiencia());
+                System.out.println("[Algortimo Bully] Enviando Candidato a Coordinador...");
+                Socket s = cliente.SocketAsociado("10.6.40.169");
+                cliente.EnviarIndividual(ipmaquina + ";" + "Bully;" + experiencia, s);
+            }
+        }
+        catch (IOException e){
+            System.out.println("Problema al enviar el candidato");
         }
     }
 
