@@ -99,7 +99,7 @@ public class Main implements Runnable {
         
         //El coordinador espera el inicio de otras MV
         if(ipMaquina.equals("10.6.40.169")){
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             String mensaje = EscogerCoordinador(main);
             System.out.println("[Algoritmo Bully] Nuevo Coordinador con IP: "+mensaje.split(";")[0]);
             System.out.println("[Algoritmo Bully] Avisando resultado..");
@@ -115,7 +115,7 @@ public class Main implements Runnable {
             }
         }
         else{
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         }
         try{
             FileWriter archivolog = new FileWriter("Operaciones.log",true);
