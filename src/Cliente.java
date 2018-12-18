@@ -35,7 +35,6 @@ public class Cliente {
             Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
             Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
             Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-            sockets = new ArrayList<>();
             sockets.add(SC29);
             sockets.add(SC30);
             sockets.add(SC31);
@@ -147,6 +146,7 @@ public class Cliente {
     }
 
     public void EnviarBroadcast(String data) throws IOException {
+        System.out.println("Enviando mensaje a "+sockets.size()+" nodos");
         for (Socket s: sockets){
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
             System.out.println("Stream abierto");
