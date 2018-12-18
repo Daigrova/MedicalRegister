@@ -162,13 +162,13 @@ public class Main implements Runnable {
             System.out.println("[Algoritmo Bully] Resultado: Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
             if (mensaje.split(";")[0].equals(main.ipMaquina)) {
                 main.Is_Coordinador = true;
-                if (main.cliente.SocketAsociado(mensaje.split(";")[0])!=null)
+                if (main.cliente.SocketAsociado(mensaje.split(";")[0])==null)
                     System.out.println("No se encuentra socket asociado a "+mensaje.split(";")[0]);
                 main.cliente.coordinatorSocket = main.cliente.SocketAsociado(mensaje.split(";")[0]);
                 System.out.println("[Algoritmo Bully] Esta maquina es el nuevo Coordinador");
             } else {
                 main.Is_Coordinador = false;
-                if (main.cliente.SocketAsociado(mensaje.split(";")[0])!=null)
+                if (main.cliente.SocketAsociado(mensaje.split(";")[0])==null)
                     System.out.println("No se encuentra socket asociado a "+mensaje.split(";")[0]);
                 main.cliente.coordinatorSocket= main.cliente.SocketAsociado(mensaje.split(";")[0]);
             }
@@ -232,7 +232,7 @@ public class Main implements Runnable {
             main.cliente.coordinatorSocket = main.cliente.SocketAsociado(IPCoordinador);
             try {
                 FileWriter writer = new FileWriter("Log.txt", true);
-                writer.write("Nuevo coordinador seleccionado con IP:"+IPCoordinador);
+                writer.write("Nuevo coordinador seleccionado con IP: "+IPCoordinador);
                 writer.close();
             }
             catch(IOException e){

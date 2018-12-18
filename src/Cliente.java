@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class Cliente {
 
+
     boolean waitingLog = false;
     public boolean newCoordinator = false;
     Socket coordinatorSocket;
@@ -100,8 +101,10 @@ public class Cliente {
     public Socket SocketAsociado(String IP){
         for (Socket s: sockets){
             if (s.getInetAddress().getCanonicalHostName().equals(IP))
+                System.out.println("Socket encontrado para IP " + IP);
                 return s;
         }
+        System.out.println("No se encontro socket para la IP " +  IP);
         return null;
     }
 
