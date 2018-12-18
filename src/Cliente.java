@@ -35,26 +35,12 @@ public class Cliente {
             Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
             Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
             Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-
-
-            System.out.println("Prueba de sockets");
-            DataOutputStream o1 = new DataOutputStream(SC29.getOutputStream());
-            DataOutputStream o2 = new DataOutputStream(SC30.getOutputStream());
-            DataOutputStream o3 = new DataOutputStream(SC31.getOutputStream());
-            DataOutputStream o4 = new DataOutputStream(SC32.getOutputStream());
-            o1.writeUTF("1.1.1.1;SOCKET_TEST;hola");
-            o2.writeUTF("1.1.1.1;SOCKET_TEST;hola");
-            o3.writeUTF("1.1.1.1;SOCKET_TEST;hola");
-            o4.writeUTF("1.1.1.1;SOCKET_TEST;hola");
-            o1.close();
-            o2.close();
-            o3.close();
-            o4.close();
-
             sockets.add(SC29);
             sockets.add(SC30);
             sockets.add(SC31);
             sockets.add(SC32);
+
+            ProbarSocket(sockets);
             return sockets;
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
@@ -78,6 +64,18 @@ public class Cliente {
         }
         System.out.println("No se encontro socket para la IP " + IP);
         return null;
+    }
+
+    public void ProbarSocket(List<Socket> listaSocket) {
+        try {
+            System.out.println("Prueba de sockets");
+            for (Socket s : listaSocket) {
+                DataOutputStream mensaje = new DataOutputStream(s.getOutputStream());
+                mensaje.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+                mensaje.close();
+            }
+        }
+        catch (IOException e) { System.out.println("Problema en la prueba se sockets");  e.printStackTrace(); }
     }
 
     public void EnviarBroadcast(String data,List<Socket> listaSocket) throws IOException {
