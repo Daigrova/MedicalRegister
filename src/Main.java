@@ -235,9 +235,9 @@ public class Main implements Runnable {
             ServerSocket servidor = new ServerSocket(this.servidor.puerto);
             while(true){
                 Socket socket = servidor.accept();
-                System.out.println("Conexion aceptada");
                 DataInputStream mensaje = new DataInputStream(socket.getInputStream());
                 String data = mensaje.readUTF();
+                System.out.println("Conexion aceptada - Mensaje: "+data);
                 ProcesarMensaje(this,data,this.candidatos, socket);
                 socket.close();
             }
