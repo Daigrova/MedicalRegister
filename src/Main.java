@@ -274,7 +274,7 @@ public class Main implements Runnable {
                 }
             }
             catch (IOException e){
-                System.out.println("Something wrong happened");
+                e.printStackTrace();
             }
 
         } else if (Codigo.equals("R_Bully")) {
