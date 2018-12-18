@@ -20,4 +20,4 @@ run:
 	java $(GSON):src Main
 
 clean:
-	rm -rf src/*.class
+	rm -rf src/*.class Operaciones.log
