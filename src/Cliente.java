@@ -25,7 +25,7 @@ public class Cliente {
     boolean waitingLog = false;
     public boolean newCoordinator = false;
     Socket coordinatorSocket;
-    List<Socket> sockets;
+    List<Socket> sockets = new ArrayList<>();
 
 
     public List<Socket> CrearSocket(String ipmaquina, IP listaip){
