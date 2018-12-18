@@ -32,13 +32,9 @@ public class Cliente {
         //Nomenclatura SCXX: Socket para envio de datos a servidor XX
         try {
             Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
-            System.out.println("Socket con servidor 29 iniciado");
             Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
-            System.out.println("Socket con servidor 30 iniciado");
             Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-            System.out.println("Socket con servidor 31 iniciado");
             Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-            System.out.println("Socket con servidor 32 iniciado");
             sockets = new ArrayList<>();
             sockets.add(SC29);
             sockets.add(SC30);
