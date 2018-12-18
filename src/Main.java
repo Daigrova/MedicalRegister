@@ -181,7 +181,7 @@ public class Main implements Runnable {
 
         if (Codigo.equals("Bully")) {
             candidatos.add(mensaje);
-            String escogido = EscogerCoordinador(main);
+         //   String escogido = EscogerCoordinador(main);
         } else if (Codigo.equals("R_Bully")) {
             System.out.println("[Algoritmo Bully] Resultado: Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
             if (mensaje.split(";")[0].equals(main.ipMaquina)) {
