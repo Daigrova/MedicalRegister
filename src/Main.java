@@ -71,8 +71,13 @@ public class Main implements Runnable {
             {
                 InetAddress ip = (InetAddress) ee.nextElement();
                 if (i == 1) {
-                    ipMaquina = ip.getHostAddress();
-                    System.out.println(ip.getCanonicalHostName()+";");
+                    if (ip.getHostAddress().equals("10.6.40.169")) {
+                        System.out.println("Coordinador inicial");
+                        ipMaquina = "10.6.40.169";
+                    } else {
+                        ipMaquina = ip.getHostAddress();
+                        System.out.println(ip.getHostAddress() + ";");
+                    }
                 }
                 i++;
             }
