@@ -361,8 +361,8 @@ public class Main implements Runnable {
 
         }
 
-        else{
-            System.out.println("Error en el codigo del mensaje");
+        else if (Codigo.equals("SOCKET_TEST")){
+            System.out.println("Primera prueba lograda");
         }
 
 

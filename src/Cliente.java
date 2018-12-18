@@ -35,6 +35,22 @@ public class Cliente {
             Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
             Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
             Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
+
+
+            System.out.println("Prueba de sockets");
+            DataOutputStream o1 = new DataOutputStream(SC29.getOutputStream());
+            DataOutputStream o2 = new DataOutputStream(SC30.getOutputStream());
+            DataOutputStream o3 = new DataOutputStream(SC31.getOutputStream());
+            DataOutputStream o4 = new DataOutputStream(SC32.getOutputStream());
+            o1.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+            o2.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+            o3.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+            o4.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+            o1.close();
+            o2.close();
+            o3.close();
+            o4.close();
+
             sockets.add(SC29);
             sockets.add(SC30);
             sockets.add(SC31);
