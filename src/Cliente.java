@@ -76,18 +76,22 @@ public class Cliente {
         }
     }
 
-    public void EnviarBroadcast(String data) throws IOException {
-        System.out.println("Enviando mensaje a "+sockets.size()+" nodos");
-        for (Socket s: sockets){
-            System.out.println("Abriendo stream");
-            DataOutputStream out = new DataOutputStream(s.getOutputStream());
-            System.out.println("Stream abierto");
-            out.writeUTF(data);
-            System.out.println("Mensaje enviado");
-            out.close();
+    public void EnviarBroadcast(String data) {
+        System.out.println("Enviando mensaje a " + sockets.size() + " nodos");
+        try {
+            for (Socket s : sockets) {
+                System.out.println("Abriendo stream");
+                DataOutputStream out = new DataOutputStream(s.getOutputStream());
+                System.out.println("Stream abierto");
+                out.writeUTF(data);
+                System.out.println("Mensaje enviado");
+                out.close();
+            }
+            System.out.println("Something wrong happened");
         }
-        System.out.println("Something wrong happened");
+        catch (IOException e){ System.out.println("Here is a problem"); }
     }
+
 
         public void EnviarIndividual(String data,Socket socket) throws IOException{
         DataOutputStream mensaje = new DataOutputStream(socket.getOutputStream());
