@@ -41,6 +41,7 @@ public class Cliente {
             sockets.add(SC32);
 
             ProbarSocket(sockets);
+            ProbarSocket(sockets);
             return sockets;
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
