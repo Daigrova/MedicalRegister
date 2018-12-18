@@ -243,7 +243,7 @@ public class Main implements Runnable {
                 String data = mensaje.readUTF();
                 System.out.println("Conexion aceptada - Mensaje: "+data);
                 ProcesarMensaje(this,data,this.candidatos, socket);
-              //  socket.close();
+                socket.close();
             }
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
