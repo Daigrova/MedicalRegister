@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.ZonedDateTime;
@@ -60,11 +61,20 @@ public class Main implements Runnable {
         
         //Consulta por IP de maquina
         String ipMaquina = ConsultarIPMaquina();
-        if (ipMaquina.equals(InetAddress.getLocalHost()))
-            System.out.println("Si funcionaria");
-        else
-            System.out.println("No funcionaria");
-        
+
+        System.out.println("Revisando interfaces de red");
+        Enumeration NIs = NetworkInterface.getNetworkInterfaces();
+        while(NIs.hasMoreElements()){
+            NetworkInterface n = (NetworkInterface) NIs.nextElement();
+            Enumeration ee = n.getInetAddresses();
+            while (ee.hasMoreElements())
+            {
+                InetAddress i = (InetAddress) ee.nextElement();
+                System.out.println(i.getHostAddress());
+            }
+        }
+
+
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);
 
