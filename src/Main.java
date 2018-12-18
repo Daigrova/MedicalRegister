@@ -101,9 +101,7 @@ public class Main implements Runnable {
         if(ipMaquina.equals("10.6.40.169")){
             Thread.sleep(5000);
             String mensaje = EscogerCoordinador(main);
-            System.out.println("[Algoritmo Bully] Nuevo Coordinador con IP: "+mensaje.split(";")[0]);
-            System.out.println("[Algoritmo Bully] Avisando resultado..");
-            cliente.EnviarBroadcast(mensaje, listasockets);
+
             if(mensaje.split(";")[0].equals(main.ipMaquina)){
                 main.Is_Coordinador = true;
                 main.ipCoordinador = mensaje.split(";")[0];
@@ -152,9 +150,11 @@ public class Main implements Runnable {
         }
     }
 
-
     public static String EscogerCoordinador(Main main){
-
+        if (main.candidatos.size() < 4) {
+            System.out.println("En espera de mas candidatos");
+            return null;
+        }
         System.out.println("Fueron encontrados "+main.candidatos.size()+" candidatos\nSeleccionando el mejor");
 
         String ipCoordinador = main.candidatos.get(0).split(";")[0];
@@ -169,11 +169,6 @@ public class Main implements Runnable {
 
         return ipCoordinador+";R_Bully;"+String.valueOf(expCoordinador);
     }
-
-
-
-
-
 
     public static void SolicitarArchivo(Main main,String cargo, String nombreApellido, int id_trabajador, int id_paciente,String accion, Cliente cliente){
         //REQUEST : IP_SOLICITANTE; LOG_REQUEST; DATA
@@ -270,9 +265,18 @@ public class Main implements Runnable {
 
 
         if (Codigo.equals("Bully")) {
-            candidatos.add(mensaje);
-            System.out.println("Candidato recibido");
-            EscogerCoordinador(main);
+            try {
+                candidatos.add(mensaje);
+
+                System.out.println("Candidato recibido");
+                String candidato = EscogerCoordinador(main);
+                if (candidato != null) {
+                    System.out.println("[Algoritmo Bully] Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
+                    System.out.println("[Algoritmo Bully] Avisando resultado..");
+                    main.cliente.EnviarBroadcast(candidato);
+                }
+            }
+            catch (IOException e){}
 
         } else if (Codigo.equals("R_Bully")) {
             System.out.println("[Algoritmo Bully] Resultado: Nuevo Coordinador con IP: " + mensaje.split(";")[0]);

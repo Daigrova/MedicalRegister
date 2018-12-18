@@ -152,8 +152,16 @@ public class Cliente {
         mensaje2.close();
         mensaje3.close();
     }
-    
-    public void EnviarIndividual(String data,Socket socket) throws IOException{
+
+    public void EnviarBroadcast(String data) throws IOException {
+        for (Socket s: sockets){
+            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            out.writeUTF(data);
+            out.close();
+        }
+    }
+
+        public void EnviarIndividual(String data,Socket socket) throws IOException{
         DataOutputStream mensaje = new DataOutputStream(socket.getOutputStream());
         mensaje.writeUTF(data);
         mensaje.close();
