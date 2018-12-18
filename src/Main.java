@@ -94,7 +94,6 @@ public class Main implements Runnable {
         //las demas maquinas envian su mejor candidato para algortimo de bully
         System.out.println("\nAplicando Algortimo Bully...");
         Doctor candidato = personal.getMejorDoctor();
-        main.candidatos.add(ipMaquina+";"+"Bully;"+String.valueOf(candidato.Estudios+candidato.Experiencia));
         EnviarCandidato(candidato,listasockets,ipMaquina,cliente);
         
 
