@@ -32,10 +32,12 @@ public class Cliente {
         //Nomenclatura SCXX: Socket para envio de datos a cliente XX
         if (ipmaquina.equals(listaip.M29.get(0))){
             try {
+                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
                 Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
                 Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
                 Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
                 sockets = new ArrayList<>();
+                sockets.add(SC29);
                 sockets.add(SC30);
                 sockets.add(SC31);
                 sockets.add(SC32);
@@ -48,10 +50,12 @@ public class Cliente {
         if (ipmaquina.equals(listaip.M30.get(0))){
             try {
                 Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
+                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
                 Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
                 Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
                 sockets = new ArrayList<>();
                 sockets.add(SC29);
+                sockets.add(SC30);
                 sockets.add(SC31);
                 sockets.add(SC32);
                 return sockets;
@@ -62,12 +66,14 @@ public class Cliente {
         
         if (ipmaquina.equals(listaip.M31.get(0))){
             try {
-                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
                 Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
+                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
+                Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
                 Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
                 sockets = new ArrayList<>();
-                sockets.add(SC30);
                 sockets.add(SC29);
+                sockets.add(SC30);
+                sockets.add(SC31);
                 sockets.add(SC32);
                 return sockets;
             } catch (IOException ex) {
@@ -77,13 +83,15 @@ public class Cliente {
         
         if (ipmaquina.equals(listaip.M32.get(0))){
             try {
+                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
                 Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
                 Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
+                Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
                 sockets = new ArrayList<>();
+                sockets.add(SC29);
                 sockets.add(SC30);
                 sockets.add(SC31);
-                sockets.add(SC29);
+                sockets.add(SC32);
                 return sockets;
             } catch (IOException ex) {
                 Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
