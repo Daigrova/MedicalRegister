@@ -134,14 +134,11 @@ public class Main implements Runnable {
     }
     
     public static void EnviarCandidato(Doctor candidato,List<Socket> listasockets,String ipmaquina,Cliente cliente) throws IOException{
-        if(ipmaquina.equals("10.6.40.169") == false){
+        if(!ipmaquina.equals("10.6.40.169")){
             String experiencia = String.valueOf(candidato.getEstudios()+candidato.getExperiencia());
             System.out.println("[Algortimo Bully] Enviando Candidato a Coordinador...");
-            for(int i=0;i<listasockets.size();i++){
-                if (listasockets.get(i).getInetAddress().getCanonicalHostName().equals("10.6.40.169")){
-                    cliente.EnviarIndividual(ipmaquina+";"+"Bully;"+experiencia,listasockets.get(i));
-                }
-            }
+            Socket s = cliente.SocketAsociado("10.6.40.169");
+            cliente.EnviarIndividual(ipmaquina+";"+"Bully;"+experiencia,s);            
         }
     }
 
