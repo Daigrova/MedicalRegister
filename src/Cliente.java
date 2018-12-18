@@ -40,8 +40,8 @@ public class Cliente {
             sockets.add(SC31);
             sockets.add(SC32);
 
-            ProbarSocket(sockets);
-            ProbarSocket(sockets);
+            ProbarSocket(sockets,"Prueba 1");
+            ProbarSocket(sockets,"Prueba 2");
             return sockets;
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
@@ -67,12 +67,12 @@ public class Cliente {
         return null;
     }
 
-    public void ProbarSocket(List<Socket> listaSocket) {
+    public void ProbarSocket(List<Socket> listaSocket, String mensajePrueba) {
         try {
             System.out.println("Prueba de sockets");
             for (Socket s : listaSocket) {
                 DataOutputStream mensaje = new DataOutputStream(s.getOutputStream());
-                mensaje.writeUTF("1.1.1.1;SOCKET_TEST;hola");
+                mensaje.writeUTF("1.1.1.1;SOCKET_TEST;"+mensajePrueba);
                 mensaje.close();
             }
         }
