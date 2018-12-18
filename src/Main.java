@@ -60,8 +60,8 @@ public class Main implements Runnable {
         listaip = listaip.ProcesarJSON("JSON/IP.JSON");
 
         //Consulta por IP de maquina
-        String ipMaquina= null;
-
+        String ipMaquina= ConsultarIPMaquina();
+/*
         Enumeration NIs = NetworkInterface.getNetworkInterfaces();
         int i = 0;
         while(NIs.hasMoreElements()){
@@ -82,7 +82,7 @@ public class Main implements Runnable {
                 i++;
             }
         }
-
+*/
 
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);
