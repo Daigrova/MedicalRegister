@@ -61,7 +61,7 @@ public class Main implements Runnable {
 
         //Consulta por IP de maquina
         String ipMaquina= ConsultarIPMaquina();
-/*
+
         Enumeration NIs = NetworkInterface.getNetworkInterfaces();
         int i = 0;
         while(NIs.hasMoreElements()){
@@ -71,18 +71,13 @@ public class Main implements Runnable {
             {
                 InetAddress ip = (InetAddress) ee.nextElement();
                 if (i == 1) {
-                    if (ip.getHostAddress().equals("10.6.40.169")) {
-                        System.out.println("Coordinador inicial");
-                        ipMaquina = "10.6.40.169";
-                    } else {
-                        ipMaquina = ip.getHostAddress();
-                        System.out.println(ip.getHostAddress() + ";");
-                    }
+                    ipMaquina = ip.getHostAddress();
+                    System.out.println(ip.getHostAddress() + ";");
                 }
                 i++;
             }
         }
-*/
+
 
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);

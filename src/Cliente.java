@@ -55,6 +55,8 @@ public class Cliente {
 
     public Socket SocketAsociado(String IP){
         for (Socket s: sockets){
+            System.out.println("Buscando socket para IP: "+IP);
+            System.out.println("Socket actual: "+s.getInetAddress().getCanonicalHostName());
             if (s.getInetAddress().getCanonicalHostName().equals(IP))
                 return s;
         }
