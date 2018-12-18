@@ -45,76 +45,6 @@ public class Cliente {
         }
 
         return null;
-        /*
-        if (ipmaquina.equals(listaip.M29.get(0))){
-            try {
-                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
-                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
-                Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-                Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-                sockets = new ArrayList<>();
-                sockets.add(SC29);
-                sockets.add(SC30);
-                sockets.add(SC31);
-                sockets.add(SC32);
-                return sockets;
-            } catch (IOException ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
-            }
-        }
-        
-        if (ipmaquina.equals(listaip.M30.get(0))){
-            try {
-                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
-                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
-                Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-                Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-                sockets = new ArrayList<>();
-                sockets.add(SC29);
-                sockets.add(SC30);
-                sockets.add(SC31);
-                sockets.add(SC32);
-                return sockets;
-            } catch (IOException ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
-            }
-        }
-        
-        if (ipmaquina.equals(listaip.M31.get(0))){
-            try {
-                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
-                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
-                Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-                Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-                sockets = new ArrayList<>();
-                sockets.add(SC29);
-                sockets.add(SC30);
-                sockets.add(SC31);
-                sockets.add(SC32);
-                return sockets;
-            } catch (IOException ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
-            }
-        }
-        
-        if (ipmaquina.equals(listaip.M32.get(0))){
-            try {
-                Socket SC29 = new Socket(listaip.M29.get(0),Integer.parseInt(listaip.M29.get(1)));
-                Socket SC30 = new Socket(listaip.M30.get(0),Integer.parseInt(listaip.M30.get(1)));
-                Socket SC31 = new Socket(listaip.M31.get(0),Integer.parseInt(listaip.M31.get(1)));
-                Socket SC32 = new Socket(listaip.M32.get(0),Integer.parseInt(listaip.M32.get(1)));
-                sockets = new ArrayList<>();
-                sockets.add(SC29);
-                sockets.add(SC30);
-                sockets.add(SC31);
-                sockets.add(SC32);
-                return sockets;
-            } catch (IOException ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, "Problema en crecion de Sockets", ex);
-            }
-        }
-        return null;
-        */
     }
 
     public List<Socket> SocketsExceptSelf(Socket socket){
@@ -126,7 +56,6 @@ public class Cliente {
     public Socket SocketAsociado(String IP){
         for (Socket s: sockets){
             if (s.getInetAddress().getCanonicalHostName().equals(IP))
-                System.out.println("Socket encontrado para IP " + IP);
                 return s;
         }
         System.out.println("No se encontro socket para la IP " +  IP);
@@ -154,6 +83,7 @@ public class Cliente {
             System.out.println("Mensaje enviado");
             out.close();
         }
+        System.out.println("Something wrong happened");
     }
 
         public void EnviarIndividual(String data,Socket socket) throws IOException{

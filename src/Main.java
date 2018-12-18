@@ -41,39 +41,43 @@ public class Main implements Runnable {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException, InterruptedException{
-        
+    public static void main(String[] args) throws IOException, InterruptedException {
+
         //PROCESA JSON TRABAJADORES Y LOS AGREGA A UNA LISTA personal
         Trabajadores personal = new Trabajadores();
         personal = personal.ProcesarJSON("JSON/Trabajadores.JSON");
-        
+
         ////PROCESA JSON REQUERIMIENTOS Y LOS AGREGA A UNA LISTA requerimientos
         Requerimientos requerimientos = new Requerimientos();
         requerimientos = requerimientos.ProcesarJSON("JSON/Requerimientos.JSON");
-        
+
         ////PROCESA JSON Pacientes Y LOS AGREGA A UNA LISTA pacientes
         Pacientes pacientes = new Pacientes();
         pacientes = pacientes.ProcesarJSON("JSON/Pacientes.JSON");
-        
+
         //PROCESA JSON IP e instancia una clase IP
         IP listaip = new IP();
         listaip = listaip.ProcesarJSON("JSON/IP.JSON");
-        
+
         //Consulta por IP de maquina
-        String ipMaquina = ConsultarIPMaquina();
-/*
-        System.out.println("Revisando interfaces de red");
+        String ipMaquina= null;
+
         Enumeration NIs = NetworkInterface.getNetworkInterfaces();
+        int i = 0;
         while(NIs.hasMoreElements()){
             NetworkInterface n = (NetworkInterface) NIs.nextElement();
             Enumeration ee = n.getInetAddresses();
             while (ee.hasMoreElements())
             {
-                InetAddress i = (InetAddress) ee.nextElement();
-                System.out.println(i.getHostAddress());
+                InetAddress ip = (InetAddress) ee.nextElement();
+                if (i == 1) {
+                    ipMaquina = ip.getHostAddress();
+                    System.out.println(ip.getHostAddress());
+                }
+                i++;
             }
         }
-*/
+
 
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);
