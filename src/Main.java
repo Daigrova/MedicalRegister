@@ -61,7 +61,7 @@ public class Main implements Runnable {
         
         //Consulta por IP de maquina
         String ipMaquina = ConsultarIPMaquina();
-
+/*
         System.out.println("Revisando interfaces de red");
         Enumeration NIs = NetworkInterface.getNetworkInterfaces();
         while(NIs.hasMoreElements()){
@@ -73,7 +73,7 @@ public class Main implements Runnable {
                 System.out.println(i.getHostAddress());
             }
         }
-
+*/
 
         //Crear Socket Servidor
         Servidor servidor = new Servidor(ipMaquina,listaip);
