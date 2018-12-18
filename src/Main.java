@@ -246,7 +246,7 @@ public class Main implements Runnable {
                 socket.close();
             }
         } catch (IOException ex) {
-            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
@@ -266,6 +266,7 @@ public class Main implements Runnable {
 
                 System.out.println("Candidato recibido");
                 String candidato = EscogerCoordinador(main);
+                System.out.println(candidato);
                 if (candidato != null) {
                     System.out.println("[Algoritmo Bully] Nuevo Coordinador con IP: " + mensaje.split(";")[0]);
                     System.out.println("[Algoritmo Bully] Avisando resultado..");
