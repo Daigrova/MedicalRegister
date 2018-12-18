@@ -18,21 +18,18 @@ public class Servidor {
     String ipMaquina;
     
     public Servidor(String ipMaquina,IP listaip){
+        this.ipMaquina = ipMaquina;
         if (listaip.M29.get(0).equals(ipMaquina)){
-            this.ipMaquina = ipMaquina;
             this.puerto = Integer.parseInt(listaip.M29.get(1));
         }
         if (listaip.M30.get(0).equals(ipMaquina)){
-            this.ipMaquina = ipMaquina;
             this.puerto = Integer.parseInt(listaip.M30.get(1));
         }
         if (listaip.M31.get(0).equals(ipMaquina)){
-            this.ipMaquina = ipMaquina;
             this.puerto = Integer.parseInt(listaip.M31.get(1));
             
         }
         if (listaip.M32.get(0).equals(ipMaquina)){
-            this.ipMaquina = ipMaquina;
             this.puerto = Integer.parseInt(listaip.M32.get(1));
         }
     }
