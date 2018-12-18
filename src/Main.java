@@ -323,7 +323,7 @@ public class Main implements Runnable {
                 writer.write(Data);
                 writer.close();
             }
-            catch(IOException e){
+            catch(IOException e) {
 
             }
         }
@@ -342,6 +342,10 @@ public class Main implements Runnable {
             }
             main.cliente.newCoordinator = true;
 
+        }
+
+        else{
+            System.out.println("Error en el codigo del mensaje");
         }
 
 
