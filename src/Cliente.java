@@ -134,25 +134,24 @@ public class Cliente {
         return null;
     }
 
-    public void EnviarBroadcast(String data,List<Socket> listaSocket) throws IOException{
-        //SERIALIZAR DATA EN SOCKET
-        DataOutputStream mensaje1 = new DataOutputStream(listaSocket.get(0).getOutputStream());
-        DataOutputStream mensaje2 = new DataOutputStream(listaSocket.get(1).getOutputStream());
-        DataOutputStream mensaje3 = new DataOutputStream(listaSocket.get(2).getOutputStream());
-        //ENVIAR DATA
-        mensaje1.writeUTF(data);
-        mensaje2.writeUTF(data);
-        mensaje3.writeUTF(data);
-        //Cerrar Buffer
-        mensaje1.close();
-        mensaje2.close();
-        mensaje3.close();
+    public void EnviarBroadcast(String data,List<Socket> listaSocket) throws IOException {
+
+        for (Socket s : listaSocket) {
+            //SERIALIZAR DATA EN SOCKET
+            DataOutputStream mensaje = new DataOutputStream(s.getOutputStream());
+            //ENVIAR DATA
+            mensaje.writeUTF(data);
+            //Cerrar Buffer
+            mensaje.close();
+        }
     }
 
     public void EnviarBroadcast(String data) throws IOException {
         for (Socket s: sockets){
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            System.out.println("Stream abierto");
             out.writeUTF(data);
+            System.out.println("Mensaje enviado");
             out.close();
         }
     }
