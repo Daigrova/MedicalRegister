@@ -58,7 +58,7 @@ public class Cliente {
             if (s.getInetAddress().getCanonicalHostName().equals(IP))
                 return s;
         }
-        System.out.println("No se encontro socket para la IP " +  IP);
+        System.out.println("No se encontro socket para la IP " + IP);
         return null;
     }
 

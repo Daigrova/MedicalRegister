@@ -72,7 +72,7 @@ public class Main implements Runnable {
                 InetAddress ip = (InetAddress) ee.nextElement();
                 if (i == 1) {
                     ipMaquina = ip.getHostAddress();
-                    System.out.println(ip.getHostAddress());
+                    System.out.println(ip.getCanonicalHostName()+";");
                 }
                 i++;
             }
